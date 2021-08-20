@@ -1,13 +1,16 @@
 # Preparing environment
 
 ## Run Database 
+```shell script
 docker volume create postgres_test
 docker run -d --volume postgres_test:/var/lib/postgresql/data --name postgres_test -ePOSTGRES_USER=postgres  -e POSTGRES_PASSWORD=pass -e POSTGRES_DB=test -p 5432:5432 postgres
-## Entrar a database
+```
+## Entry to database
+```shell script
 docker exec -it  postgres_test /bin/bash
 su postgres
 psql 
-
+```
 # getting-started Project
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
@@ -24,7 +27,12 @@ You can run your application in dev mode that enables live coding using:
 ```
 curl -w"\n" localhost:8080/hello 
 curl -w"\n" localhost:8080/fruit
+```
 
+Trying database
+```
+curl -w"\n" -XPOST localhost:8080/person -d'{"name": "Jesus","birthDate": "1966-12-23"}' -H "Content-Type: application/json
+curl -w"\n" localhost:8080/person
 ```
 
 > **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at http://localhost:8080/q/dev/.
